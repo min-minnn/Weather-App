@@ -5,11 +5,12 @@ import axios from 'axios';
 const Wrapper = styled.div`
   width: 34rem;
   text-align: center;
-  background-color: #dddddd;
+  background-color: #DDDDDD;
 `;
 
 const WeatherIcon = styled.img`
   width: 4rem;
+  margin-top: 1rem;
 `;
 
 const TempWrapper = styled.div`
@@ -19,6 +20,7 @@ const TempWrapper = styled.div`
 const Temp = styled.p`
   font-family: 'ya-jalnan';
   font-size: 1.25rem;
+  letter-spacing: 0.125rem;
 `;
 
 
@@ -31,12 +33,11 @@ function Weather() {
     temp_max: 0,
     icon: ''
   });
-  
 
   const city = 'Seoul';
   const key = encodeURIComponent('be49caa578bfc10dabc60627f069d9e3');
   const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
-  const icon = `https://openweathermap.com/img/w/${weather.icon}.png`;
+  const icon = `https://openweathermap.com/img/wn/${weather.icon}.png`;
 
   useEffect(() => {
     const getWeather = async () => {
