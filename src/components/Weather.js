@@ -5,24 +5,45 @@ import axios from 'axios';
 const Wrapper = styled.div`
   width: 34rem;
   text-align: center;
+  border: 1px solid black;
+`;
+
+const IconWrapper = styled.div`
+  padding-bottom: 3rem ;
   background-color: #DDDDDD;
 `;
 
 const WeatherIcon = styled.img`
-  width: 4rem;
-  margin-top: 1rem;
+  width: 6.5rem;
+`;
+
+const LocationWrapper = styled.div`
+  padding: 1.5rem;
+  text-align: left;
+  background-color: #DDDDDD;
+`;
+
+const Location = styled.p`
+  font-family: 'yg-jalnan';
+  font-size: 1.75rem;
+  margin: 0;
 `;
 
 const TempWrapper = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #FFFFFF;
+  padding: 1.5rem 0;
 `;
 
 const Temp = styled.p`
-  font-family: 'ya-jalnan';
+  font-family: 'yg-jalnan';
   font-size: 1.25rem;
   letter-spacing: 0.125rem;
+  margin: 0;
 `;
-
 
 function Weather() {
   const [weather, setWeather] = useState({
@@ -64,13 +85,17 @@ function Weather() {
 
   return (
     <Wrapper>
-      <WeatherIcon src={icon} />
-      <TempWrapper>
-        <Temp>{weather.name}</Temp>
+      <LocationWrapper>
+        <Location>{weather.name}</Location>
+      </LocationWrapper>
+      <IconWrapper>
         <Temp>{weather.main}</Temp>
-        <Temp>{weather.temp}ºC</Temp>
-        <Temp>{weather.temp_min}ºC</Temp>
-        <Temp>{weather.temp_max}ºC</Temp>
+        <WeatherIcon src={icon} />
+        <Temp>현재 {weather.temp}℃</Temp>
+      </IconWrapper>
+      <TempWrapper>
+        <Temp>최저: {weather.temp_min}℃</Temp>
+        <Temp>최고: {weather.temp_max}℃</Temp>
       </TempWrapper>
     </Wrapper>
   );
