@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
 import styled from 'styled-components';
 import axios from 'axios';
 
 const Wrapper = styled.div`
   width: 34rem;
+  text-align: center;
+  background-color: #dddddd;
 `;
 
 const WeatherIcon = styled.img`
@@ -24,15 +25,17 @@ const Temp = styled.p`
 function Weather() {
   const [weather, setWeather] = useState({
     main: '',
+    name: '',
     temp: 0,
     temp_min: 0,
     temp_max: 0,
     icon: ''
   });
+  
 
   const city = 'Seoul';
   const key = encodeURIComponent('be49caa578bfc10dabc60627f069d9e3');
-  const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&lang=kr`;
+  const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
   const icon = `https://openweathermap.com/img/w/${weather.icon}.png`;
 
   useEffect(() => {
@@ -44,9 +47,10 @@ function Weather() {
           const data = result.data;
           setWeather({
             main: data.weather[0].main,
-            temp: parseInt(data.main.temp - 273),
-            temp_min: parseInt(data.main.temp_min - 273),
-            temp_max: parseInt(data.main.temp_max - 273),
+            name: data.name,
+            temp: parseInt(data.main.temp),
+            temp_min: parseInt(data.main.temp_min),
+            temp_max: parseInt(data.main.temp_max),
             icon: data.weather[0].icon
           })
         })
@@ -61,10 +65,11 @@ function Weather() {
     <Wrapper>
       <WeatherIcon src={icon} />
       <TempWrapper>
+        <Temp>{weather.name}</Temp>
         <Temp>{weather.main}</Temp>
-        <Temp>{weather.temp}</Temp>
-        <Temp>{weather.temp_min}</Temp>
-        <Temp>{weather.temp_max}</Temp>
+        <Temp>{weather.temp}ºC</Temp>
+        <Temp>{weather.temp_min}ºC</Temp>
+        <Temp>{weather.temp_max}ºC</Temp>
       </TempWrapper>
     </Wrapper>
   );
