@@ -31,7 +31,7 @@ function Weather() {
   });
 
   const city = 'Seoul';
-  const key = 'be49caa578bfc10dabc60627f069d9e3'
+  const key = encodeURIComponent('be49caa578bfc10dabc60627f069d9e3');
   const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&lang=kr`;
   const icon = `https://openweathermap.com/img/w/${weather.icon}.png`;
 
