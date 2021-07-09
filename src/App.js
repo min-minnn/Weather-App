@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import Weather from './components/Weather';
 
 const Wrapper = styled.div`
+  height: 100vh;
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+  align-items: center;
 `;
 
 function App() {

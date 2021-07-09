@@ -6,11 +6,12 @@ const Wrapper = styled.div`
   width: 34rem;
   text-align: center;
   border: 1px solid black;
+  box-shadow: 0 0 3rem #DDD;
+  background-color: #87CEFA;
 `;
 
 const IconWrapper = styled.div`
   padding-bottom: 3rem ;
-  background-color: #DDDDDD;
 `;
 
 const WeatherIcon = styled.img`
@@ -20,13 +21,17 @@ const WeatherIcon = styled.img`
 const LocationWrapper = styled.div`
   padding: 1.5rem;
   text-align: left;
-  background-color: #DDDDDD;
 `;
 
 const Location = styled.p`
   font-family: 'yg-jalnan';
   font-size: 1.75rem;
   margin: 0;
+`;
+
+const Desc = styled.p`
+  font-family: 'yg-jalnan';
+  font-size: 1.25rem;
 `;
 
 const TempWrapper = styled.div`
@@ -40,15 +45,16 @@ const TempWrapper = styled.div`
 
 const Temp = styled.p`
   font-family: 'yg-jalnan';
-  font-size: 1.25rem;
+  font-size: 1.375rem;
   letter-spacing: 0.125rem;
   margin: 0;
 `;
 
 function Weather() {
-  const [weather, setWeather] = useState({
+    const [weather, setWeather] = useState({
     main: '',
     name: '',
+    description: '',
     temp: 0,
     temp_min: 0,
     temp_max: 0,
@@ -56,8 +62,9 @@ function Weather() {
   });
 
   const city = 'Seoul';
+  const lang = 'kr';
   const key = encodeURIComponent('be49caa578bfc10dabc60627f069d9e3');
-  const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
+  const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric&lang=${lang}`;
   const icon = `https://openweathermap.com/img/wn/${weather.icon}.png`;
 
   useEffect(() => {
@@ -70,6 +77,7 @@ function Weather() {
           setWeather({
             main: data.weather[0].main,
             name: data.name,
+            description: data.weather[0].description,
             temp: parseInt(data.main.temp),
             temp_min: parseInt(data.main.temp_min),
             temp_max: parseInt(data.main.temp_max),
@@ -90,6 +98,7 @@ function Weather() {
       </LocationWrapper>
       <IconWrapper>
         <Temp>{weather.main}</Temp>
+        <Desc>{weather.description}</Desc>
         <WeatherIcon src={icon} />
         <Temp>현재 {weather.temp}℃</Temp>
       </IconWrapper>
