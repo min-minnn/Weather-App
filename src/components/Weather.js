@@ -63,7 +63,7 @@ function Weather() {
 
   const city = 'Seoul';
   const lang = 'kr';
-  const key = encodeURIComponent('be49caa578bfc10dabc60627f069d9e3');
+  const key = encodeURIComponent(' ');
   const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric&lang=${lang}`;
   const icon = `https://openweathermap.com/img/wn/${weather.icon}.png`;
 
